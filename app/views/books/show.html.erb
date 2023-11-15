@@ -21,10 +21,12 @@
         <div class="book-info-label">Category:</div>
         <div class="book-info-value"><%= @book.category.name %></div>
       </div>
+      <%= turbo_frame_tag dom_id(@book, 'page_count') do %>
       <div class="book-info mb-4">
         <div class="book-info-label">Pages:</div>
         <div class="book-info-value"><%= @book.page_count %></div>
       </div>
+      <%end%>
       <div class="book-info mb-4">
         <div class="book-info-label">ISBN:</div>
         <div class="book-info-value"><%= @book.isbn %></div>
@@ -40,8 +42,8 @@
       <div class="book-info-row">
         <%= reserve_book_button(@book, css_class: 'btn-primary btn-details') %>
         <%= loan_book_button(@book, css_class: 'btn-primary btn-details') %>
-        <%= link_to "Edit", edit_book_path(@book), class: "btn btn-secondary btn-edit" %>
-        <%= button_to "Delete", @book, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+        <%= link_to "Edit", edit_book_path(@book), class: "btn btn-secondary btn-edit", data: { turbo_frame: '_top' } %>
+        <%= button_to "Delete", @book, method: :delete, class: "btn btn-outline-danger btn-sm", data: { turbo_frame: '_top' } %>
       </div>
     </div>
   </div>

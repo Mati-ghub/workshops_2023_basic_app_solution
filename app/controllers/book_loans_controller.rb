@@ -5,14 +5,14 @@ class BookLoansController < ApplicationController
   def create
     respond_to do |format|
       if @book_loan.save
-        Publishers::LoanBookPublisher.new(@book_loan.attributes).publish
+        Publishers::LoanBookPublisher.new(@book_loan.attributes, 'book_loans').publish
         notice_calendar
         LoanCreatedJob.perform_async(@book_loan.id)
         DueDateNotificationJob.perform_at(@book_loan.due_date - 1.day, @book_loan.id)
-        format.html { redirect_to book_url(book), notice: flash_notice }
+        format.html { redirect_to book_path(book), notice: flash_notice }
         format.json { render :show, status: :created, location: @book_loan }
       else
-        format.html { redirect_to book_url(book), alert: @book_loan.errors.full_messages.join(', ') }
+        format.html { redirect_to book_path(book), alert: @book_loan.errors.full_messages.join(', ') }
         format.json { render json: @book_loan.errors, status: :unprocessable_entity }
       end
     end
@@ -21,6 +21,7 @@ class BookLoansController < ApplicationController
   def cancel
     respond_to do |format|
       if @book_loan.cancelled!
+        Publishers::LoanBookPublisher.new(@book_loan.attributes, 'books_cancelation').publish
         format.html { redirect_to book_requests_path, notice: flash_notice }
         format.json { render :show, status: :ok, location: book }
       end

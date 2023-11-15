@@ -1,0 +1,30 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User ID</th>
+      <th>Data</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @logs.each do |log| %>
+      <tr>
+        <td><%= log["id"] %></td>
+        <td><%= log["user_id"] %></td>
+        <td>
+          <ul class="nested-data">
+            <% log["data"].each do |key, value| %>
+              <li>
+                <strong><%= key.capitalize %>:</strong> <%= value %>
+              </li>
+            <% end %>
+          </ul>
+        </td>
+        <td><%= log["created_at"] %></td>
+        <td><%= log["updated_at"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

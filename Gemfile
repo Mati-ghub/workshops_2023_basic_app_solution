@@ -24,6 +24,9 @@ gem 'omniauth-rails_csrf_protection'
 gem 'google-api-client', require: 'google/apis/calendar_v3'
 gem 'sidekiq-cron'
 gem 'bunny'
+gem 'hotwire-rails'
+gem 'sneakers'
+gem 'kaminari'
 
 
 
@@ -43,6 +46,9 @@ group :development, :test do
   gem 'rubocop-rake'
   gem 'rubocop-rspec'
   gem 'shoulda-matchers', '~> 5.3'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :development do
@@ -50,10 +56,5 @@ group :development do
   gem 'web-console'
 end
 
-group :test do
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
-end
 
 gem "sidekiq", "~> 7.1"
