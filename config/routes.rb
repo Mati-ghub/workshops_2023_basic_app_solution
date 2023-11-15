@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  get '/books/search', to: 'books#search'
+  resources :logs
   resources :books
   resources :publishers
   resources :authors
   resources :categories
-  resources :book_loans, only: [:create] do
+  resources :book_loans, only: [:create, :index] do
     member do
       post 'cancel'
     end
@@ -19,4 +21,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'books#index'
   get '/book-requests', to: 'book_requests#index', as: 'book_requests'
+
 end

@@ -25,6 +25,6 @@
     method: :post,
     data: { turbo: false } do |f| %>
     <%= f.submit "Log in with #{provider.to_s.titleize}", type: "image", src: url_for("/assets/btn_google_signin_dark_normal_web.png") %>
-  <% end %>auth_authorize_path(resource_name, provider), data: { turbo: false } %><br/>
+  <% end %>
   <% end %>
 <% end %>

@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-require 'rails_helper'
-
 RSpec.describe WeatherPresenter do
   let(:data) do
     {
@@ -16,6 +14,10 @@ RSpec.describe WeatherPresenter do
         'name' => 'City Name'
       }
     }
+  end
+
+  before do
+    allow_any_instance_of(WeatherApiConnector).to receive(:weather_data).and_return(data)
   end
 
   subject { described_class.new(data) }

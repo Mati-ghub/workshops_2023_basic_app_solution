@@ -22,13 +22,7 @@ module Publishers
     private
 
     def connection_options
-      {
-        host: "localhost",
-        port: 5672,
-        vhost: "/",
-        username: "guest",
-        password: "guest"
-      }
+      A9n.base_app[:connection_options]
     end
 
     def connection
